@@ -27,6 +27,33 @@
 
 [Error 3: Un error en la consola mencionaba que habia error debido a que existia una funcion duplicada en conversor.js. Se soluciono borrando las exportaciones en el bloque de exportacion agrupada que ya existian previamente existian como export function]
 
+## 2.1 Depuracion
+Error 1: ¿Por qué falla?
+
+const { sumar } = require('./calculadora.js');
+
+    - Falla debido a la ruta, es commonJS pero dependiendo de en que archivo y en que folder exista esta linea, no podra encontrar calculadora.js
+
+Error 2: ¿Por qué falla?
+
+export function miFuncion() {}
+module.exports = { miFuncion };
+
+    - Falla porque se esta combinando CommonJS y ES6, se tiene que definir uno u el otro, si quisieramos Common, usariamos unicamente function miFuncion con module exports, y si fuera ES6 con export function MiFuncion seria suficiente.
+
+Error 3: ¿Por qué falla en navegador?
+<script src="app.js"></script>
+
+
+    - Falta type="module". <script type="module" src="app.js"></script>
+
+Error 4: ¿Por qué falla?
+
+import * from './modulo.js'; 
+
+    - La sintaxis de importacion tiene que ser algo como import * as modulo from './modulo.js'; Nota que falta el "as x" para poder importarlo como importacion nombrada
+
+
 
 ## 3. Respuestas a Reflexión
 ¿Por qué CommonJS es síncrono y ES6 modules puede ser asíncrono?
